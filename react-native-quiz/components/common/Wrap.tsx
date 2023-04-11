@@ -1,12 +1,12 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from "react";
+import { View } from "react-native";
 
 interface IProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 function Wrap({ children }: IProps) {
-	return <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>{children}</View>;
+  return <View style={{ flex: 1, alignItems: "center", backgroundColor: "#fff" }}>{children}</View>;
 }
 
 export default Wrap;
