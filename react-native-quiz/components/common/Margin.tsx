@@ -1,17 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
-import styled from 'styled-components/native';
+import { StyleProp } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 
 interface IProps {
-	style: string | any;
+	style: StyleProp<ViewStyle>;
 }
 
 function Margin({ style }: IProps) {
-	return <MarginWrap style={style} />;
+	return <View style={[style]}></View>;
 }
-
-const MarginWrap = styled.View<any>`
-	margin: ${({ style }) => style}px 0;
-`;
 
 export default Margin;

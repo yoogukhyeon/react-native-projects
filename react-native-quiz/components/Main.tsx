@@ -1,15 +1,16 @@
-import { View, Image } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import Margin from '../components/common/Margin';
+
 import styled from 'styled-components/native';
 
 function Main() {
 	return (
 		<>
 			<Image source={require('../assets/images/home.png')} style={{ width: 200, height: 200 }} />
-			<Margin style="5" />
+			<Margin style={{ marginVertical: 5 }} />
 			<View>
 				<QuizTitle>축구 지식 퀴즈?</QuizTitle>
-				<Margin style="5" />
+				<Margin style={{ marginVertical: 5 }} />
 				<QuizText>
 					지식이란? {'\n'}
 					배워서 이해하고 알아가면서 익히는 지식은

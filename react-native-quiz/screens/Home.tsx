@@ -4,19 +4,19 @@ import Main from '../components/Main';
 
 import Margin from '../components/common/Margin';
 import ButtonBox from '../components/ButtonBox';
-import Wrap from '../components/common/Wrap';
+import SafeWrap from '../components/common/SafeWrap';
 
 function Home({ navigation }: any) {
 	return (
-		<Wrap>
+		<SafeWrap>
 			<Padding>
 				<View style={{ justifyContent: 'center', alignItems: 'center' }}>
 					<Main />
 				</View>
-				<Margin style={7} />
+				<Margin style={{ marginVertical: 15 }} />
 				<ButtonBox navigation={navigation} />
 			</Padding>
-		</Wrap>
+		</SafeWrap>
 	);
 }
 

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { useState } from 'react';
 import Border from '../components/common/Border';
 
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 function ButtonBox({ navigation }: any) {
 	const [isActive, setIsActive] = useState<boolean>(false);
@@ -21,8 +21,10 @@ function ButtonBox({ navigation }: any) {
 
 	const onPressTest = () => {
 		if (!activeIdx) {
+			if (Platform.OS === 'web') return alert('퀴즈 유형을 선택해주세요.');
 			return Alert.alert('요청', '퀴즈 유형을 선택해주세요.');
 		}
+
 		//router 정리
 		navigation.navigate('Quiz', { query: activeQuery });
 	};
@@ -34,7 +36,12 @@ function ButtonBox({ navigation }: any) {
 				<Btn title="축구퀴즈2" active={false} idx={2} isActive={activeIdx} onPress={onPress} />
 			</ButtonContainer>
 			<Border />
-			<Btn title="테스트 하러가기" active={true} onPress={onPressTest} style={'rgb(9, 163, 52);'} />
+			<Btn
+				title="테스트 하러가기"
+				active={true}
+				onPress={onPressTest}
+				style={{ backgroundColor: 'rgb(9, 163, 52)' }}
+			/>
 		</>
 	);
 }
