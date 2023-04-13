@@ -1,9 +1,9 @@
 import { View } from 'react-native';
 import Padding from '../components/common/Padding';
-import Main from '../components/Main';
+import Main from '../components/main/Main';
 
 import Margin from '../components/common/Margin';
-import ButtonBox from '../components/ButtonBox';
+import ButtonBox from '../components/main/ButtonBox';
 import SafeWrap from '../components/common/SafeWrap';
 
 function Home({ navigation }: any) {

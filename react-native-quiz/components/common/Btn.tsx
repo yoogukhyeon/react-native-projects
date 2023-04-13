@@ -13,6 +13,7 @@ interface IProps {
 function Btn({ title, style, active, isActive, idx, onPress }: IProps) {
 	const defaultColor = 'rgb(230, 230, 240)';
 	const activeColor = 'rgb(41, 41, 63)';
+	
 	const backgroundColor = isActive
 		? isActive[idx] === idx
 			? { backgroundColor: activeColor, flex: 1 }

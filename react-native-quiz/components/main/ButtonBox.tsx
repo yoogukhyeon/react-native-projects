@@ -1,18 +1,18 @@
-import Btn from '../components/common/Btn';
+import Btn from '../common/Btn';
 import styled from 'styled-components/native';
 import { useState } from 'react';
-import Border from '../components/common/Border';
+import Border from '../common/Border';
 
 import { Alert, Platform } from 'react-native';
 
 function ButtonBox({ navigation }: any) {
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const [activeIdx, setActiveId] = useState<any>(null);
+	const [activeIdx, setActiveIdx] = useState<any>(null);
 	const [activeQuery, setActiveQuery] = useState<number>(0);
 
 	const onPress = (idx: number) => {
 		setIsActive((prev) => !prev);
-		setActiveId({
+		setActiveIdx({
 			[idx]: idx,
 			isActive: isActive,
 		});

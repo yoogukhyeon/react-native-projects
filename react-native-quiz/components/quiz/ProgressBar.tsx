@@ -1,12 +1,26 @@
 import { Text, View, Platform } from 'react-native';
 import styled from 'styled-components/native';
 
-function ProgressBar() {
+interface IProps {
+	progress: number;
+}
+
+function ProgressBar({ progress }: IProps) {
 	return (
 		<ProgressWrap>
 			<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 10 }}>
-				{Platform.OS === 'web' ? <ProgressWeb /> : <Progress />}
-				<Text style={{ color: '#fff' }}>10%</Text>
+				{Platform.OS === 'web' ? (
+					<ProgressWeb>
+						<Text
+							style={{ width: `${progress ?? 0}%`, backgroundColor: 'rgb(9, 163, 52)', height: 10 }}
+						></Text>
+					</ProgressWeb>
+				) : (
+					<Progress>
+						<Text style={{ width: `${progress ?? 0}%`, backgroundColor: 'rgb(9, 163, 52)' }}></Text>
+					</Progress>
+				)}
+				<Text style={{ color: '#fff' }}>{progress}%</Text>
 			</View>
 		</ProgressWrap>
 	);
@@ -22,14 +36,14 @@ const ProgressWrap = styled.View`
 	padding: 0 80px;
 `;
 
-const ProgressWeb = styled.Text`
+const ProgressWeb = styled.View`
 	color: #fff;
 	width: 300px;
 	height: 4px;
 	background: rgb(236, 236, 236);
 `;
 
-const Progress = styled.Text`
+const Progress = styled.View`
 	color: #fff;
 	flex: 1;
 	height: 4px;

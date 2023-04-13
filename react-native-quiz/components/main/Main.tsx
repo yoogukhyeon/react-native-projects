@@ -1,12 +1,12 @@
 import { View, Image, Text } from 'react-native';
-import Margin from '../components/common/Margin';
+import Margin from '../common/Margin';
 
 import styled from 'styled-components/native';
 
 function Main() {
 	return (
 		<>
-			<Image source={require('../assets/images/home.png')} style={{ width: 200, height: 200 }} />
+			<Image source={require('../../assets/images/home.png')} style={{ width: 200, height: 200 }} />
 			<Margin style={{ marginVertical: 5 }} />
 			<View>
 				<QuizTitle>축구 지식 퀴즈?</QuizTitle>

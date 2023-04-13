@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Padding from '../components/common/Padding';
 import SafeWrap from '../components/common/SafeWrap';
-import ProgressBar from '../components/ProgressBar';
+import ProgressBar from '../components/quiz/ProgressBar';
+import Margin from '../components/common/Margin';
+import QuizWrap from '../components/common/QuizWrap';
+import Info from '../components/quiz/Info';
+import List from '../components/quiz/List';
 
-interface Data {
+export interface Data {
 	questionNo: number;
 	answer: string[];
 	correct_answer: string;
@@ -19,66 +23,85 @@ const data: Data[] = [
 		correct_answer: '맨유',
 		question: '22-23 EPL 챔스 진출팀이 아닌 것은?',
 	},
+	{
+		questionNo: 2,
+		answer: ['긱스', '네드베드', '리베리', '네이마르'],
+		correct_answer: '리베리',
+		question: '발롱도르 드림팀 왼쪽 윙 후보에 들어간 인물은?',
+	},
 ];
+
+export interface UserChk {
+	correct: boolean;
+	answer: string;
+	correctAnswer: string;
+}
+
 function Quiz({ navigation, route }: any) {
 	const { query } = route.params;
 
 	const [number, setNumber] = useState<number>(0);
 	const [score, setScore] = useState<number>(0);
-	const [selectedProblem, setSelectedProblem] = useState<number | null>(null);
+	const [userChk, setUserChk] = useState<UserChk[]>([]);
 	const [nextBtn, setNextBtn] = useState<boolean>(false);
+	const [over, setOver] = useState<boolean>(false);
 
-	const onPressProblem = (answer: string) => {
-		console.log('answer :::', answer);
+	const onPressProblem = useCallback(
+		(answer: string) => {
+			const correct = data[number].correct_answer === answer;
+			if (correct) setScore((prev) => prev + 1);
+
+			const userChkObj = {
+				correct,
+				answer,
+				correctAnswer: data[number].correct_answer,
+			};
+
+			setUserChk((prev) => [...prev, userChkObj]);
+
+			if (number + 1 === data.length) {
+				setOver(true);
+			} else {
+				setNextBtn(true);
+			}
+		},
+		[userChk, number, score]
+	);
+
+	const onPressNext = () => {
+		setNumber((prev) => prev + 1);
+		setNextBtn(false);
 	};
+
+	const onPressResult = () => {
+		//router 정리
+		navigation.navigate('Result', { query: score });
+	};
+
+	const [progress, setProgress] = useState<number>();
+	useEffect(() => {
+		const percent = ((number + 1) / data.length) * 100;
+
+		setProgress(percent);
+	}, [number, over]);
 
 	return (
 		<SafeWrap>
 			<Padding>
-				<View>
-					<Text>
-						{score} / {data.length}
-					</Text>
-				</View>
-				<View>
-					<Text style={styles.quizTitle}>1. {data[number].question}</Text>
-				</View>
-				<View>
-					{data[number].answer.map((item) => (
-						<TouchableOpacity
-							style={[
-								styles.button,
-								{
-									backgroundColor:
-										selectedProblem === data[number].questionNo
-											? 'linear-gradient(90deg, rgb(21, 243, 125), rgb(61, 196, 122))'
-											: selectedProblem !== null
-											? 'linear-gradient(90deg, rgb(233, 50, 50), rgb(185, 92, 92));'
-											: 'rgb(236, 236, 236);',
-								},
-							]}
-							key={item}
-							onPress={() => onPressProblem(item)}
-							disabled={selectedProblem !== null && selectedProblem !== data[number].questionNo}
-						>
-							<Text style={styles.buttonText}>{item}</Text>
-						</TouchableOpacity>
-					))}
-					{selectedProblem !== null && (
-						<View style={{ width: '100%' }}>
-							<Text>{`Problem ${selectedProblem}`}</Text>
-						</View>
-					)}
-
-					{!!nextBtn && (
-						<TouchableOpacity style={styles.nextBtn}>
-							<Text style={styles.nextBtnText}>다음</Text>
-							<Ionicons name="arrow-forward" size={24} color="white" />
-						</TouchableOpacity>
-					)}
-				</View>
+				<Info number={number} data={data} score={score} />
+				<Margin style={{ marginVertical: 6 }} />
+				<List
+					number={number}
+					data={data}
+					userChk={userChk}
+					nextBtn={nextBtn}
+					over={over}
+					onPressProblem={onPressProblem}
+					onPressNext={onPressNext}
+					onPressResult={onPressResult}
+				/>
 			</Padding>
-			<ProgressBar />
+			<ProgressBar progress={progress ?? 0} />
 		</SafeWrap>
 	);
 }
