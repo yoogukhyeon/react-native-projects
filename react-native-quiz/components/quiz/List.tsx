@@ -5,7 +5,7 @@ import NextBtn from './NextBtn';
 
 interface IProps {
 	number: number;
-	data: Data[];
+	data: Data;
 	userChk: UserChk[];
 	nextBtn: boolean;
 	over: boolean;
@@ -17,11 +17,11 @@ interface IProps {
 function List({ number, data, userChk, onPressProblem, onPressNext, onPressResult, over, nextBtn }: IProps) {
 	return (
 		<QuizWrap>
-			<View>
-				<Text style={styles.quizTitle}>1. {data[number].question}</Text>
+			<View style={styles.question}>
+				<Text style={styles.quizTitle}>1. {data.question}</Text>
 			</View>
 			<View>
-				{data[number].answer.map((item) => (
+				{data.answer.map((item) => (
 					<TouchableOpacity
 						style={[
 							styles.button,
@@ -51,6 +51,10 @@ function List({ number, data, userChk, onPressProblem, onPressNext, onPressResul
 }
 
 const styles = StyleSheet.create({
+	question: {
+		justifyContent: 'flex-start',
+		width: '100%',
+	},
 	quizTitle: {
 		fontSize: 18,
 		lineHeight: 24,

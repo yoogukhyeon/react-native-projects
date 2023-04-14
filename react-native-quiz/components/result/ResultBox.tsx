@@ -1,11 +1,16 @@
-import { Image, Text, View, ScrollView } from 'react-native';
+import { Image, Text, View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import Margin from '../common/Margin';
+import NextBtn from '../quiz/NextBtn';
 import ResultText from './ResultText';
 
 interface IProps {
 	result: number;
+	navigation: any;
 }
-function ResultBox({ result }: IProps) {
+function ResultBox({ result, navigation }: IProps) {
+	const onPressHome = () => {
+		navigation.navigate('Home');
+	};
 	return (
 		<ScrollView>
 			<Image
@@ -57,9 +62,30 @@ function ResultBox({ result }: IProps) {
 				>
 					{result < 6 ? '공부를 더 하세요....' : '오호 똑똑하시네요!!!'}
 				</ResultText>
+
+				<TouchableOpacity style={styles.nextBtn} onPress={onPressHome}>
+					<Text style={styles.nextBtnText}>퀴즈 다시 하러 가기</Text>
+				</TouchableOpacity>
 			</View>
 		</ScrollView>
 	);
 }
+
+const styles = StyleSheet.create({
+	nextBtn: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: '100%',
+		height: 55,
+		backgroundColor: 'rgba(142, 202, 159, 0.424)',
+		borderRadius: 10,
+		paddingHorizontal: 20,
+	},
+	nextBtnText: {
+		color: 'rgb(9, 163, 52)',
+		fontWeight: '600',
+		fontSize: 18,
+	},
+});
 
 export default ResultBox;

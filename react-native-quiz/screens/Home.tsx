@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Padding from '../components/common/Padding';
 import Main from '../components/main/Main';
 
@@ -10,11 +10,13 @@ function Home({ navigation }: any) {
 	return (
 		<SafeWrap>
 			<Padding>
-				<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-					<Main />
-				</View>
-				<Margin style={{ marginVertical: 15 }} />
-				<ButtonBox navigation={navigation} />
+				<ScrollView>
+					<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+						<Main />
+					</View>
+					<Margin style={{ marginVertical: 15 }} />
+					<ButtonBox navigation={navigation} />
+				</ScrollView>
 			</Padding>
 		</SafeWrap>
 	);

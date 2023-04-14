@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 import Padding from '../components/common/Padding';
 import SafeWrap from '../components/common/SafeWrap';
 import ProgressBar from '../components/quiz/ProgressBar';
 import Margin from '../components/common/Margin';
-import QuizWrap from '../components/common/QuizWrap';
 import Info from '../components/quiz/Info';
 import List from '../components/quiz/List';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { apiDataState } from '../api/store';
+import { getQuizList } from '../api/services/api';
 
 export interface Data {
 	questionNo: number;
@@ -15,21 +16,6 @@ export interface Data {
 	correct_answer: string;
 	question: string;
 }
-
-const data: Data[] = [
-	{
-		questionNo: 1,
-		answer: ['리버플', '토트넘', '맨시티', '맨유'],
-		correct_answer: '맨유',
-		question: '22-23 EPL 챔스 진출팀이 아닌 것은?',
-	},
-	{
-		questionNo: 2,
-		answer: ['긱스', '네드베드', '리베리', '네이마르'],
-		correct_answer: '리베리',
-		question: '발롱도르 드림팀 왼쪽 윙 후보에 들어간 인물은?',
-	},
-];
 
 export interface UserChk {
 	correct: boolean;
@@ -46,20 +32,26 @@ function Quiz({ navigation, route }: any) {
 	const [nextBtn, setNextBtn] = useState<boolean>(false);
 	const [over, setOver] = useState<boolean>(false);
 
+	const [apiData, setApiData] = useRecoilState<Data[]>(apiDataState);
+	const data = useRecoilValue(getQuizList(query));
+	useEffect(() => {
+		setApiData(data);
+	}, []);
+
 	const onPressProblem = useCallback(
 		(answer: string) => {
-			const correct = data[number].correct_answer === answer;
+			const correct = apiData[number]?.correct_answer === answer;
 			if (correct) setScore((prev) => prev + 1);
 
 			const userChkObj = {
 				correct,
 				answer,
-				correctAnswer: data[number].correct_answer,
+				correctAnswer: apiData[number]?.correct_answer,
 			};
 
 			setUserChk((prev) => [...prev, userChkObj]);
 
-			if (number + 1 === data.length) {
+			if (number + 1 === apiData.length) {
 				setOver(true);
 			} else {
 				setNextBtn(true);
@@ -80,26 +72,39 @@ function Quiz({ navigation, route }: any) {
 
 	const [progress, setProgress] = useState<number>();
 	useEffect(() => {
-		const percent = ((number + 1) / data.length) * 100;
+		const percent = ((number + 1) / apiData?.length) * 100;
 
 		setProgress(percent);
-	}, [number, over]);
+	}, [number, over, apiData]);
 
 	return (
 		<SafeWrap>
 			<Padding>
-				<Info number={number} data={data} score={score} />
-				<Margin style={{ marginVertical: 6 }} />
-				<List
-					number={number}
-					data={data}
-					userChk={userChk}
-					nextBtn={nextBtn}
-					over={over}
-					onPressProblem={onPressProblem}
-					onPressNext={onPressNext}
-					onPressResult={onPressResult}
-				/>
+				{apiData.length < 1 && (
+					<View style={[styles.container, styles.horizontal]}>
+						{Platform.OS === 'android' ? (
+							<ActivityIndicator size={80} color="#0000ff" />
+						) : (
+							<ActivityIndicator size="large" color="#0000ff" />
+						)}
+					</View>
+				)}
+				{apiData.length > 0 && (
+					<>
+						<Info number={number} data={apiData} score={score} />
+						<Margin style={{ marginVertical: 6 }} />
+						<List
+							number={number}
+							data={apiData[number]}
+							userChk={userChk}
+							nextBtn={nextBtn}
+							over={over}
+							onPressProblem={onPressProblem}
+							onPressNext={onPressNext}
+							onPressResult={onPressResult}
+						/>
+					</>
+				)}
 			</Padding>
 			<ProgressBar progress={progress ?? 0} />
 		</SafeWrap>
@@ -107,41 +112,14 @@ function Quiz({ navigation, route }: any) {
 }
 
 const styles = StyleSheet.create({
-	quizTitle: {
-		fontSize: 18,
-		lineHeight: 24,
-		marginBottom: 20,
-		fontWeight: 'bold',
-	},
-	button: {
-		width: 300,
-		height: 55,
-		backgroundColor: 'rgb(236, 236, 236)',
-		borderRadius: 10,
+	container: {
+		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center',
-		marginBottom: 15,
 	},
-
-	buttonText: {
-		color: 'rgb(104, 104, 104)',
-		fontWeight: '600',
-		fontSize: 18,
-	},
-	nextBtn: {
+	horizontal: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		width: 300,
-		height: 55,
-		backgroundColor: 'rgb(9, 163, 52)',
-		borderRadius: 10,
-		paddingHorizontal: 20,
-	},
-	nextBtnText: {
-		color: '#fff',
-		fontWeight: '600',
-		fontSize: 18,
+		justifyContent: 'space-around',
+		padding: 20,
 	},
 });
 

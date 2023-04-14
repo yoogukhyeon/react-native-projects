@@ -15,7 +15,7 @@ function Result({ navigation, route }: any) {
 	return (
 		<SafeWrap>
 			<Padding>
-				<ResultBox result={result} />
+				<ResultBox result={result} navigation={navigation} />
 			</Padding>
 		</SafeWrap>
 	);
