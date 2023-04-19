@@ -7,6 +7,7 @@ import Result from './screens/Result';
 import { RecoilRoot } from 'recoil';
 //react-native settings
 import { decode, encode } from 'base-64';
+import { View } from 'react-native';
 
 if (!global.btoa) {
 	global.btoa = encode;
@@ -17,14 +18,78 @@ if (!global.atob) {
 }
 const Stack = createNativeStackNavigator();
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Tab1 from './screens/Tab1';
+import Tab2 from './screens/Tab2';
+import Community from './screens/Community';
+import { Ionicons } from '@expo/vector-icons';
+const Tab = createBottomTabNavigator();
+
+function QuizStackNavigation() {
+	return (
+		<Stack.Navigator>
+			<Stack.Screen name="Home" options={navigationOptionHome} component={Home} />
+			<Stack.Screen name="Quiz" options={navigationOptionQuiz} component={Quiz} />
+			<Stack.Screen name="Result" options={navigationOptionResult} component={Result} />
+		</Stack.Navigator>
+	);
+}
+
+function CommunityStackNavigation() {
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen name="Community" component={Community} />
+		</Stack.Navigator>
+	);
+}
+
+function MyTabs() {
+	return (
+		<Tab.Navigator
+			screenOptions={{
+				tabBarStyle: {
+					backgroundColor: 'rgb(9, 163, 52)',
+				},
+
+				tabBarActiveBackgroundColor: 'rgb(90, 90, 255);',
+			}}
+			initialRouteName="CommunityStackNavigation"
+		>
+			<Tab.Screen
+				name="커뮤니티"
+				component={CommunityStackNavigation}
+				options={{
+					headerTitleAlign: 'center',
+					tabBarIcon: () => <Ionicons name="home" size={24} color="white" />,
+					tabBarLabelStyle: { color: 'white', paddingBottom: 3 },
+				}}
+			/>
+			<Tab.Screen
+				name="퀴즈"
+				component={QuizStackNavigation}
+				options={{
+					headerShown: false,
+					tabBarIcon: () => <Ionicons name="settings" size={24} color="white" />,
+					tabBarLabelStyle: { color: 'white', paddingBottom: 3 },
+				}}
+			/>
+		</Tab.Navigator>
+	);
+}
+
 function App() {
 	return (
 		<RecoilRoot>
 			<NavigationContainer>
-				<Stack.Navigator initialRouteName="Home">
-					<Stack.Screen name="Home" options={navigationOptionHome} component={Home} />
+				<Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+					<Stack.Screen name="BottomNavigation" component={MyTabs} />
+					{/* <Stack.Screen name="Home" options={navigationOptionHome} component={Home} />
 					<Stack.Screen name="Quiz" options={navigationOptionQuiz} component={Quiz} />
-					<Stack.Screen name="Result" options={navigationOptionResult} component={Result} />
+					<Stack.Screen name="Result" options={navigationOptionResult} component={Result} /> */}
 				</Stack.Navigator>
 			</NavigationContainer>
 		</RecoilRoot>
@@ -38,6 +103,7 @@ const navigationOptionHome: any = ({ navigation }: any) => {
 		headerTitleStyle: {
 			color: 'rgb(37, 37, 37)',
 			fontWeight: 'bold',
+			fontSize: 22,
 		},
 	};
 };
@@ -49,6 +115,7 @@ const navigationOptionQuiz: any = ({ navigation }: any) => {
 		headerTitleStyle: {
 			color: 'rgb(37, 37, 37)',
 			fontWeight: 'bold',
+			fontSize: 22,
 		},
 	};
 };
@@ -60,6 +127,7 @@ const navigationOptionResult: any = ({ navigation }: any) => {
 		headerTitleStyle: {
 			color: 'rgb(37, 37, 37)',
 			fontWeight: 'bold',
+			fontSize: 22,
 		},
 	};
 };
