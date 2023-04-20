@@ -14,10 +14,8 @@ export default function Community() {
 					<CommunitySwiper />
 				</View>
 
-				<View style={{ flex: 1 }}>
-					<Text style={{ fontSize: 22, fontWeight: '700', paddingHorizontal: 20, paddingTop: 20 }}>
-						최신 소식
-					</Text>
+				<View style={{ flex: 1, marginHorizontal: 20, marginTop: 20 }}>
+					<Text style={{ fontSize: 22, fontWeight: '700' }}>최신 소식</Text>
 				</View>
 				<ScrollView
 					horizontal={true}
@@ -117,6 +115,56 @@ export default function Community() {
 						</View>
 						<View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>
 							<Text>Home</Text>
+						</View>
+					</View>
+				</ScrollView>
+				<View style={{ flex: 1, marginHorizontal: 20, marginBottom: 20 }}>
+					<Text style={{ fontSize: 22, fontWeight: '700' }}>인기 소식</Text>
+				</View>
+				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+					<View
+						style={{
+							borderWidth: 1,
+							borderColor: '#222',
+							width: 170,
+							height: 170,
+							marginLeft: 20,
+							marginBottom: 20,
+						}}
+					>
+						<View></View>
+						<View>
+							<Text>테스트 입니다.</Text>
+						</View>
+					</View>
+					<View
+						style={{
+							borderWidth: 1,
+							borderColor: '#222',
+							width: 170,
+							height: 170,
+							marginLeft: 20,
+							marginBottom: 20,
+						}}
+					>
+						<View></View>
+						<View>
+							<Text>테스트 입니다.</Text>
+						</View>
+					</View>
+					<View
+						style={{
+							borderWidth: 1,
+							borderColor: '#222',
+							width: 170,
+							height: 170,
+							marginLeft: 20,
+							marginBottom: 20,
+						}}
+					>
+						<View></View>
+						<View>
+							<Text>테스트 입니다.</Text>
 						</View>
 					</View>
 				</ScrollView>

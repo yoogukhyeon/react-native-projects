@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleProp } from 'react-native';
-import { View, ViewStyle } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 
 interface IProps {
 	style: StyleProp<ViewStyle>;

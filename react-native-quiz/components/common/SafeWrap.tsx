@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, TextStyle, View, ViewStyle } from 'react-native';
 
 interface IProps {
 	children: React.ReactNode;

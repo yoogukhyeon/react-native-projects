@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 import Padding from '../components/common/Padding';
-import SafeWrap from '../components/common/SafeWrap';
+
 import ProgressBar from '../components/quiz/ProgressBar';
 import Margin from '../components/common/Margin';
 import Info from '../components/quiz/Info';
@@ -9,6 +9,7 @@ import List from '../components/quiz/List';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { apiDataState } from '../api/store';
 import { getQuizList } from '../api/services/api';
+import SafeWrap from '../components/common/SafeWrap';
 
 export interface Data {
 	questionNo: number;

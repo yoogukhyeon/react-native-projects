@@ -1,18 +1,12 @@
 import React from 'react';
-
-import styled from 'styled-components/native';
+import { View } from 'react-native';
 
 interface IProps {
 	children: React.ReactNode;
 }
 
 function Padding({ children }: IProps) {
-	return <PaddingWrap>{children}</PaddingWrap>;
+	return <View style={{ paddingHorizontal: 20, paddingVertical: 20, flex: 1 }}>{children}</View>;
 }
-
-const PaddingWrap = styled.View`
-	padding: 20px;
-	flex: 1;
-`;
 
 export default Padding;
