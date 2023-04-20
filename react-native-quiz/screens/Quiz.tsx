@@ -77,6 +77,8 @@ function Quiz({ navigation, route }: any) {
 		setProgress(percent);
 	}, [number, over, apiData]);
 
+	console.log('apiDate ::', apiData.length);
+
 	return (
 		<SafeWrap>
 			<Padding>

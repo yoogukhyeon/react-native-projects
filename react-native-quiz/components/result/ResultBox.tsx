@@ -12,7 +12,7 @@ function ResultBox({ result, navigation }: IProps) {
 		navigation.navigate('Home');
 	};
 	return (
-		<ScrollView>
+		<ScrollView showsVerticalScrollIndicator={false}>
 			<Image
 				source={require('../../assets/images/result.jpg')}
 				style={{

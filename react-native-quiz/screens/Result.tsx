@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Image, Text, View } from 'react-native';
-import Margin from '../components/common/Margin';
-import Padding from '../components/common/Padding';
 import SafeWrap from '../components/common/SafeWrap';
+import Padding from '../components/common/Padding';
 import ResultBox from '../components/result/ResultBox';
 
 function Result({ navigation, route }: any) {

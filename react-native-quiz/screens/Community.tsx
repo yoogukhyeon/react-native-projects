@@ -1,5 +1,4 @@
 import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
-import Padding from '../components/common/Padding';
 import SafeWrap from '../components/common/SafeWrap';
 // import Swiper from 'react-native-swiper';
 import { useWindowDimensions } from 'react-native';
