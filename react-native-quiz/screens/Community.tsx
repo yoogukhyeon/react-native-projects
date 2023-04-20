@@ -4,18 +4,31 @@ import SafeWrap from '../components/common/SafeWrap';
 import { useWindowDimensions } from 'react-native';
 import CommunitySwiper from '../components/community/CommunitySwiper';
 
+import * as Font from 'expo-font';
+import { useEffect, useState } from 'react';
+
 export default function Community() {
 	const { width: WINDOW_WIDTH } = useWindowDimensions();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			await Font.loadAsync({
+				fontBold: require('../assets/fonts/NotoSansKR-Bold.otf'),
+				fontRegular: require('../assets/fonts/NotoSansKR-Regular.otf'),
+			});
+		};
+		fetchData();
+	}, []);
 
 	return (
 		<SafeWrap>
 			<ScrollView showsVerticalScrollIndicator={false}>
-				<View style={{ width: '100%', height: 300 }}>
+				{/* <View style={{ width: '100%', height: 300 }}>
 					<CommunitySwiper />
-				</View>
+				</View> */}
 
 				<View style={{ flex: 1, marginHorizontal: 20, marginTop: 20 }}>
-					<Text style={{ fontSize: 22, fontWeight: '700' }}>최신 소식</Text>
+					<Text style={{ fontFamily: 'fontBold', fontSize: 22, fontWeight: '700' }}>최신 소식</Text>
 				</View>
 				<ScrollView
 					horizontal={true}
@@ -119,7 +132,7 @@ export default function Community() {
 					</View>
 				</ScrollView>
 				<View style={{ flex: 1, marginHorizontal: 20, marginBottom: 20 }}>
-					<Text style={{ fontSize: 22, fontWeight: '700' }}>인기 소식</Text>
+					<Text style={{ fontFamily: 'fontBold', fontSize: 22, fontWeight: '700' }}>인기 소식</Text>
 				</View>
 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 					<View
