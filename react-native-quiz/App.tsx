@@ -7,7 +7,7 @@ import Result from './screens/Result';
 import { RecoilRoot } from 'recoil';
 //react-native settings
 import { decode, encode } from 'base-64';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 
 if (!global.btoa) {
 	global.btoa = encode;
@@ -24,7 +24,15 @@ import Tab2 from './screens/Tab2';
 import Community from './screens/Community';
 import { Ionicons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
-
+import {
+	useFonts,
+	NotoSansKR_100Thin,
+	NotoSansKR_300Light,
+	NotoSansKR_400Regular,
+	NotoSansKR_500Medium,
+	NotoSansKR_700Bold,
+	NotoSansKR_900Black,
+} from '@expo-google-fonts/noto-sans-kr';
 function QuizStackNavigation() {
 	return (
 		<Stack.Navigator>
@@ -82,6 +90,19 @@ function MyTabs() {
 }
 
 function App() {
+	let [fontsLoaded] = useFonts({
+		fontBold: require('./assets/fonts/NotoSansKR-Bold.otf'),
+		fontRegular: require('./assets/fonts/NotoSansKR-Regular.otf'),
+		fontThin: require('./assets/fonts/NotoSansKR-Thin.otf'),
+	});
+
+	if (!fontsLoaded) {
+		return (
+			<View>
+				<Text>hello</Text>
+			</View>
+		);
+	}
 	return (
 		<RecoilRoot>
 			<NavigationContainer>

@@ -6,19 +6,20 @@ import CommunitySwiper from '../components/community/CommunitySwiper';
 
 import * as Font from 'expo-font';
 import { useEffect, useState } from 'react';
+import AppLoading from 'expo-app-loading';
 
 export default function Community() {
 	const { width: WINDOW_WIDTH } = useWindowDimensions();
 
-	useEffect(() => {
-		const fetchData = async () => {
-			await Font.loadAsync({
-				fontBold: require('../assets/fonts/NotoSansKR-Bold.otf'),
-				fontRegular: require('../assets/fonts/NotoSansKR-Regular.otf'),
-			});
-		};
-		fetchData();
-	}, []);
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		await Font.loadAsync({
+	// 			fontBold: require('../assets/fonts/NotoSansKR-Bold.otf'),
+	// 			fontRegular: require('../assets/fonts/NotoSansKR-Regular.otf'),
+	// 		});
+	// 	};
+	// 	fetchData();
+	// }, []);
 
 	return (
 		<SafeWrap>
@@ -28,13 +29,9 @@ export default function Community() {
 				</View> */}
 
 				<View style={{ flex: 1, marginHorizontal: 20, marginTop: 20 }}>
-					<Text style={{ fontFamily: 'fontBold', fontSize: 22, fontWeight: '700' }}>최신 소식</Text>
+					<Text style={{ fontFamily: 'fontBold', fontSize: 22 }}>최신 소식</Text>
 				</View>
-				<ScrollView
-					horizontal={true}
-					showsHorizontalScrollIndicator={false}
-					contentContainerStyle={{ marginTop: 20, marginBottom: 20 }}
-				>
+				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 					<View
 						style={{
 							width: 130,
@@ -131,8 +128,8 @@ export default function Community() {
 						</View>
 					</View>
 				</ScrollView>
-				<View style={{ flex: 1, marginHorizontal: 20, marginBottom: 20 }}>
-					<Text style={{ fontFamily: 'fontBold', fontSize: 22, fontWeight: '700' }}>인기 소식</Text>
+				<View style={{ flex: 1, marginHorizontal: 20 }}>
+					<Text style={{ fontFamily: 'fontBold', fontSize: 22 }}>인기 소식</Text>
 				</View>
 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 					<View
