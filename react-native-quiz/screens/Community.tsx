@@ -3,32 +3,20 @@ import SafeWrap from '../components/common/SafeWrap';
 // import Swiper from 'react-native-swiper';
 import { useWindowDimensions } from 'react-native';
 import CommunitySwiper from '../components/community/CommunitySwiper';
-
-import * as Font from 'expo-font';
-import { useEffect, useState } from 'react';
-import AppLoading from 'expo-app-loading';
+import Padding from '../components/common/Padding';
+import Divided from '../components/common/Divided';
 
 export default function Community() {
 	const { width: WINDOW_WIDTH } = useWindowDimensions();
 
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		await Font.loadAsync({
-	// 			fontBold: require('../assets/fonts/NotoSansKR-Bold.otf'),
-	// 			fontRegular: require('../assets/fonts/NotoSansKR-Regular.otf'),
-	// 		});
-	// 	};
-	// 	fetchData();
-	// }, []);
-
 	return (
 		<SafeWrap>
 			<ScrollView showsVerticalScrollIndicator={false}>
-				{/* <View style={{ width: '100%', height: 300 }}>
+				<View style={{ flex: 1, height: 200, paddingHorizontal: 20 }}>
 					<CommunitySwiper />
-				</View> */}
+				</View>
 
-				<View style={{ flex: 1, marginHorizontal: 20, marginTop: 20 }}>
+				<View style={{ flex: 1, marginHorizontal: 20, marginTop: 5 }}>
 					<Text style={{ fontFamily: 'fontBold', fontSize: 22 }}>최신 소식</Text>
 				</View>
 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -39,6 +27,8 @@ export default function Community() {
 							marginLeft: 20,
 							borderWidth: 0.5,
 							borderColor: '#dddddd',
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View style={{ flex: 2 }}>
@@ -58,6 +48,8 @@ export default function Community() {
 							marginLeft: 20,
 							borderWidth: 0.5,
 							borderColor: '#dddddd',
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View style={{ flex: 2 }}>
@@ -77,6 +69,8 @@ export default function Community() {
 							marginLeft: 20,
 							borderWidth: 0.5,
 							borderColor: '#dddddd',
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View style={{ flex: 2 }}>
@@ -96,6 +90,8 @@ export default function Community() {
 							marginLeft: 20,
 							borderWidth: 0.5,
 							borderColor: '#dddddd',
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View style={{ flex: 2 }}>
@@ -115,6 +111,8 @@ export default function Community() {
 							marginLeft: 20,
 							borderWidth: 0.5,
 							borderColor: '#dddddd',
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View style={{ flex: 2 }}>
@@ -140,6 +138,8 @@ export default function Community() {
 							height: 170,
 							marginLeft: 20,
 							marginBottom: 20,
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View></View>
@@ -155,6 +155,8 @@ export default function Community() {
 							height: 170,
 							marginLeft: 20,
 							marginBottom: 20,
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View></View>
@@ -170,6 +172,8 @@ export default function Community() {
 							height: 170,
 							marginLeft: 20,
 							marginBottom: 20,
+							borderRadius: 15,
+							overflow: 'hidden',
 						}}
 					>
 						<View></View>
@@ -177,6 +181,116 @@ export default function Community() {
 							<Text>테스트 입니다.</Text>
 						</View>
 					</View>
+				</ScrollView>
+				<View style={{ flex: 1, marginHorizontal: 20 }}>
+					<Text style={{ fontFamily: 'fontBold', fontSize: 22 }}>커뮤니티 글</Text>
+				</View>
+				<ScrollView showsVerticalScrollIndicator={false}>
+					<Padding>
+						<View
+							style={{
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'flex-start',
+								gap: 15,
+							}}
+						>
+							<View
+								style={{
+									flexGrow: 1,
+									borderWidth: 1,
+									borderColor: '#222',
+									height: 80,
+									borderRadius: 15,
+								}}
+							></View>
+							<View style={{ flexGrow: 2, height: 80, justifyContent: 'space-between' }}>
+								<Text>제목</Text>
+								<Text style={{ flexGrow: 1 }}>내용입니다.</Text>
+								<View>
+									<Text>icon</Text>
+								</View>
+							</View>
+						</View>
+						<Divided style={{ marginVertical: 15 }} />
+						<View
+							style={{
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'flex-start',
+								gap: 15,
+							}}
+						>
+							<View
+								style={{
+									flexGrow: 1,
+									borderWidth: 1,
+									borderColor: '#222',
+									height: 80,
+									borderRadius: 15,
+								}}
+							></View>
+							<View style={{ flexGrow: 2, height: 80, justifyContent: 'space-between' }}>
+								<Text>제목</Text>
+								<Text style={{ flexGrow: 1 }}>내용입니다.</Text>
+								<View>
+									<Text>icon</Text>
+								</View>
+							</View>
+						</View>
+						<Divided style={{ marginVertical: 15 }} />
+						<View
+							style={{
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'flex-start',
+								gap: 15,
+							}}
+						>
+							<View
+								style={{
+									flexGrow: 1,
+									borderWidth: 1,
+									borderColor: '#222',
+									height: 80,
+									borderRadius: 15,
+								}}
+							></View>
+							<View style={{ flexGrow: 2, height: 80, justifyContent: 'space-between' }}>
+								<Text>제목</Text>
+								<Text style={{ flexGrow: 1 }}>내용입니다.</Text>
+								<View>
+									<Text>icon</Text>
+								</View>
+							</View>
+						</View>
+						<Divided style={{ marginVertical: 15 }} />
+						<View
+							style={{
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'flex-start',
+								gap: 15,
+							}}
+						>
+							<View
+								style={{
+									flexGrow: 1,
+									borderWidth: 1,
+									borderColor: '#222',
+									height: 80,
+									borderRadius: 15,
+								}}
+							></View>
+							<View style={{ flexGrow: 2, height: 80, justifyContent: 'space-between' }}>
+								<Text>제목</Text>
+								<Text style={{ flexGrow: 1 }}>내용입니다.</Text>
+								<View>
+									<Text>icon</Text>
+								</View>
+							</View>
+						</View>
+					</Padding>
 				</ScrollView>
 			</ScrollView>
 		</SafeWrap>

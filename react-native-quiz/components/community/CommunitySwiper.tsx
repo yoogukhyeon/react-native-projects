@@ -32,7 +32,10 @@ export default function CommunitySwiper() {
 		>
 			{data.map((val, idx) => (
 				<View testID={val.url} style={styles.slide} key={idx}>
-					<Image source={{ uri: val.url }} style={{ width: WINDOW_WIDTH, height: 300 }} />
+					<Image
+						source={{ uri: val.url }}
+						style={{ flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 15 }}
+					/>
 				</View>
 			))}
 		</Swiper>
@@ -42,9 +45,7 @@ export default function CommunitySwiper() {
 const styles = StyleSheet.create({
 	wrapper: {},
 	slide: {
-		width: '100%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#9DD6EB',
+		flex: 1,
+		borderRadius: 15,
 	},
 });

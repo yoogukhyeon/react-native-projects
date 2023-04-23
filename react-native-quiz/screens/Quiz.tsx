@@ -85,11 +85,7 @@ function Quiz({ navigation, route }: any) {
 			<Padding>
 				{apiData.length < 1 && (
 					<View style={[styles.container, styles.horizontal]}>
-						{Platform.OS === 'android' ? (
-							<ActivityIndicator size={80} color="#0000ff" />
-						) : (
-							<ActivityIndicator size="large" color="#0000ff" />
-						)}
+						<ActivityIndicator size={80} color="#0000ff" />
 					</View>
 				)}
 				{apiData.length > 0 && (
