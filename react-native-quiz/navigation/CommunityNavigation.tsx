@@ -10,7 +10,7 @@ function CommunityNavigation() {
 				headerShown: false,
 			}}
 		>
-			<Stack.Screen name="Community" component={Community} />
+			<Stack.Screen name="CommunityRoute" component={Community} />
 		</Stack.Navigator>
 	);
 }

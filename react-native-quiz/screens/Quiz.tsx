@@ -35,6 +35,7 @@ function Quiz({ navigation, route }: any) {
 
 	const [apiData, setApiData] = useRecoilState<Data[]>(apiDataState);
 	const data = useRecoilValue(getQuizList(query));
+
 	useEffect(() => {
 		setApiData(data);
 	}, []);
@@ -78,14 +79,12 @@ function Quiz({ navigation, route }: any) {
 		setProgress(percent);
 	}, [number, over, apiData]);
 
-	console.log('apiDate ::', apiData.length);
-
 	return (
 		<SafeWrap>
 			<Padding>
 				{apiData.length < 1 && (
 					<View style={[styles.container, styles.horizontal]}>
-						<ActivityIndicator size={80} color="#0000ff" />
+						<ActivityIndicator size={80} color="rgb(9, 163, 52)" />
 					</View>
 				)}
 				{apiData.length > 0 && (
@@ -105,7 +104,7 @@ function Quiz({ navigation, route }: any) {
 					</>
 				)}
 			</Padding>
-			<ProgressBar progress={progress ?? 0} />
+			{apiData.length > 0 && <ProgressBar progress={progress ?? 0} />}
 		</SafeWrap>
 	);
 }
