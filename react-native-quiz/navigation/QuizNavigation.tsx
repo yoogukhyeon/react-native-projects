@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../screens/Home';
-import Quiz from '../screens/Quiz';
-import Result from '../screens/Result';
+import QuizMainScreen from '../screens/quiz/QuizMainScreen';
+import QuizScreen from '../screens/quiz/QuizScreen';
+import QuizResultScreen from '../screens/quiz/QuizResultScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,9 +12,9 @@ function QuizNavigation() {
 				headerShown: false,
 			}}
 		>
-			<Stack.Screen name="HomeRoute" component={Home} />
-			<Stack.Screen name="QuizRoute" component={Quiz} />
-			<Stack.Screen name="ResultRoute" component={Result} />
+			<Stack.Screen name="HomeRoute" component={QuizMainScreen} />
+			<Stack.Screen name="QuizRoute" component={QuizScreen} />
+			<Stack.Screen name="ResultRoute" component={QuizResultScreen} />
 		</Stack.Navigator>
 	);
 }

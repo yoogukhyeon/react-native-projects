@@ -3,7 +3,7 @@
 import axios, { AxiosInstance } from 'axios';
 import CryptoJS from 'react-native-crypto-js';
 import { selectorFamily } from 'recoil';
-import { Data } from '../../screens/Quiz';
+import { Data } from '../../screens/quiz/QuizScreen';
 import instance from '../instance';
 
 export const fetchApiData = async (no: number): Promise<any[]> => {

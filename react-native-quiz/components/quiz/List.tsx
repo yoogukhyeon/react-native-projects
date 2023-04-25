@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import QuizWrap from '../common/QuizWrap';
-import { Data, UserChk } from '../../screens/Quiz';
+import { Data, UserChk } from '../../screens/quiz/QuizScreen';
 import NextBtn from './NextBtn';
 
 interface IProps {

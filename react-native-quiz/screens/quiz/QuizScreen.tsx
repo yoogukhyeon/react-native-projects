@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
-import Padding from '../components/common/Padding';
-
-import ProgressBar from '../components/quiz/ProgressBar';
-import Margin from '../components/common/Margin';
-import Info from '../components/quiz/Info';
-import List from '../components/quiz/List';
+import Padding from '../../components/common/Padding';
+import ProgressBar from '../../components/quiz/ProgressBar';
+import Margin from '../../components/common/Margin';
+import Info from '../../components/quiz/Info';
+import List from '../../components/quiz/List';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { apiDataState } from '../api/store';
-import { getQuizList } from '../api/services/api';
-import SafeWrap from '../components/common/SafeWrap';
+import { apiDataState } from '../../api/store';
+import { getQuizList } from '../../api/services/api';
+import SafeWrap from '../../components/common/SafeWrap';
 
 export interface Data {
 	questionNo: number;
@@ -24,7 +23,7 @@ export interface UserChk {
 	correctAnswer: string;
 }
 
-function Quiz({ navigation, route }: any) {
+function QuizScreen({ navigation, route }: any) {
 	const { query } = route.params;
 
 	const [number, setNumber] = useState<number>(0);
@@ -69,7 +68,7 @@ function Quiz({ navigation, route }: any) {
 
 	const onPressResult = () => {
 		//router 정리
-		navigation.navigate('Result', { query: score });
+		navigation.navigate('ResultRoute', { query: score });
 	};
 
 	const [progress, setProgress] = useState<number>();
@@ -121,4 +120,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Quiz;
+export default QuizScreen;

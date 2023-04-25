@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Community from '../screens/Community';
+import CommunityScreen from '../screens/community/CommunityScreen';
+
 const Stack = createNativeStackNavigator();
 
 function CommunityNavigation() {
@@ -10,7 +11,7 @@ function CommunityNavigation() {
 				headerShown: false,
 			}}
 		>
-			<Stack.Screen name="CommunityRoute" component={Community} />
+			<Stack.Screen name="CommunityRoute" component={CommunityScreen} />
 		</Stack.Navigator>
 	);
 }

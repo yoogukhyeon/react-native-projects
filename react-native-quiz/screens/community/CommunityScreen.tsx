@@ -1,26 +1,41 @@
-import { View, Text, ScrollView, StyleSheet, Image, FlatList, ActivityIndicator } from 'react-native';
-import SafeWrap from '../components/common/SafeWrap';
+import {
+	View,
+	Text,
+	ScrollView,
+	StyleSheet,
+	Image,
+	FlatList,
+	ActivityIndicator,
+	Platform,
+	TouchableOpacity,
+} from 'react-native';
+import SafeWrap from '../../components/common/SafeWrap';
 // import Swiper from 'react-native-swiper';
 import { useWindowDimensions } from 'react-native';
-import CommunitySwiper from '../components/community/CommunitySwiper';
-import Padding from '../components/common/Padding';
-import Divided from '../components/common/Divided';
+import CommunitySwiper from '../../components/community/CommunitySwiper';
+import Padding from '../../components/common/Padding';
+import Divided from '../../components/common/Divided';
 import { useEffect, useState } from 'react';
-import { data } from '../data';
+import { data } from '../../data';
+import CommunityTitle from '../../components/community/common/CommunityTitle';
+import Icon from '../../components/common/Icon';
 
-export default function Community() {
+export default function CommunityScreen({ navigation }) {
 	const { width: WINDOW_WIDTH } = useWindowDimensions();
 
+	const goToAdd = () => {
+		navigation.navigate('CommunityAddRoute');
+	};
 	const HeaderComponent = () => {
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{ flex: 1, height: 200 }}>
 					<CommunitySwiper />
 				</View>
-
-				<View style={{ flex: 1, marginTop: 5 }}>
-					<Text style={{ fontFamily: 'fontBold', fontSize: 22 }}>최신 소식</Text>
-				</View>
+				<CommunityTitle
+					text={'최신 소식'}
+					style={Platform.OS === 'ios' ? { marginVertical: 15 } : { marginTop: 5 }}
+				/>
 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 					<View
 						style={{
@@ -128,9 +143,7 @@ export default function Community() {
 						</View>
 					</View>
 				</ScrollView>
-				<View style={{ flex: 1 }}>
-					<Text style={{ fontFamily: 'fontBold', fontSize: 22 }}>인기 소식</Text>
-				</View>
+				<CommunityTitle text={'인기 소식'} style={Platform.OS === 'ios' && { marginVertical: 15 }} />
 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 					<View
 						style={{
@@ -183,8 +196,18 @@ export default function Community() {
 						</View>
 					</View>
 				</ScrollView>
-				<View style={{ flex: 1 }}>
-					<Text style={{ fontFamily: 'fontBold', fontSize: 22 }}>커뮤니티 글</Text>
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+					<CommunityTitle text={'커뮤니티 글'} style={Platform.OS === 'ios' && { marginVertical: 15 }} />
+					<View
+						style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 5 }}
+					>
+						<TouchableOpacity hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}>
+							<Icon name="list" size={24} color="black" />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={goToAdd} hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}>
+							<Icon name="add" size={24} color="black" />
+						</TouchableOpacity>
+					</View>
 				</View>
 			</ScrollView>
 		);
@@ -254,7 +277,7 @@ export default function Community() {
 				<Padding>
 					<FlatList
 						onEndReached={onEndReached}
-						onEndReachedThreshold={0.3}
+						onEndReachedThreshold={0.6}
 						ListFooterComponent={loading && over && Loading}
 						showsVerticalScrollIndicator={false}
 						data={data.slice(0, arrSlice)}

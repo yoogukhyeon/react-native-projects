@@ -1,11 +1,11 @@
 import { ScrollView, View } from 'react-native';
-import Padding from '../components/common/Padding';
-import Main from '../components/main/Main';
-import Margin from '../components/common/Margin';
-import ButtonBox from '../components/main/ButtonBox';
-import SafeWrap from '../components/common/SafeWrap';
+import Padding from '../../components/common/Padding';
+import Main from '../../components/quizMain/Main';
+import Margin from '../../components/common/Margin';
+import ButtonBox from '../../components/quizMain/ButtonBox';
+import SafeWrap from '../../components/common/SafeWrap';
 
-function Home({ navigation }: any) {
+function QuizMainScreen({ navigation }: any) {
 	return (
 		<SafeWrap>
 			<Padding>
@@ -21,4 +21,4 @@ function Home({ navigation }: any) {
 	);
 }
 
-export default Home;
+export default QuizMainScreen;

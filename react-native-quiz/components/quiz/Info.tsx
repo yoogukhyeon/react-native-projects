@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { View, Text } from 'react-native';
-import { Data } from '../../screens/Quiz';
+import { Data } from '../../screens/quiz/QuizScreen';
 
 interface IProps {
 	number: number;

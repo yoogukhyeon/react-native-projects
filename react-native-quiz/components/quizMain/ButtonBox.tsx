@@ -26,7 +26,7 @@ function ButtonBox({ navigation }: any) {
 		}
 
 		//router 정리
-		navigation.navigate('Quiz', { query: activeQuery });
+		navigation.navigate('QuizRoute', { query: activeQuery });
 	};
 
 	return (

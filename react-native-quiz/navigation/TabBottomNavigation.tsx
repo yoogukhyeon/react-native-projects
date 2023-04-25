@@ -3,8 +3,22 @@ import CommunityNavigation from './CommunityNavigation';
 import QuizNavigation from './QuizNavigation';
 import MyPageNavigation from './MyPageNavigation';
 import { Ionicons } from '@expo/vector-icons';
+import Icon from '../components/common/Icon';
 
 const Tab = createBottomTabNavigator();
+
+const tabBarIconOption = (focused: boolean, color: string, route: any) => {
+	let iconName: string;
+	if (route.name === 'Home') {
+		iconName = focused ? 'home' : 'home-outline';
+	} else if (route.name === 'Quiz') {
+		iconName = focused ? 'game-controller' : 'game-controller-outline';
+	} else if (route.name === 'My Page') {
+		iconName = focused ? 'person' : 'person-outline';
+	}
+
+	return <Icon name={iconName} size={24} color={color} />;
+};
 
 function TabBottomNavigation() {
 	return (
@@ -18,16 +32,7 @@ function TabBottomNavigation() {
 					borderTopColor: '#fff',
 				},
 				tabBarIcon: ({ focused, color }) => {
-					let iconName;
-					if (route.name === 'Home') {
-						iconName = focused ? 'home' : 'home-outline';
-					} else if (route.name === 'Quiz') {
-						iconName = focused ? 'game-controller' : 'game-controller-outline';
-					} else if (route.name === 'My Page') {
-						iconName = focused ? 'person' : 'person-outline';
-					}
-
-					return <Ionicons name={iconName} size={24} color={color} />;
+					return tabBarIconOption(focused, color, route);
 				},
 				tabBarActiveTintColor: 'rgb(90, 90, 255)',
 				tabBarInactiveTintColor: 'gray',
