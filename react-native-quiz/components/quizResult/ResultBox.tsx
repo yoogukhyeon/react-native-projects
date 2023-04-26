@@ -9,7 +9,7 @@ interface IProps {
 }
 function ResultBox({ result, navigation }: IProps) {
 	const onPressHome = () => {
-		navigation.navigate('Home');
+		navigation.navigate('HomeRoute');
 	};
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>

@@ -4,7 +4,6 @@ import SafeWrap from '../../components/common/SafeWrap';
 import Padding from '../../components/common/Padding';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import CommunityTitle from '../../components/community/common/CommunityTitle';
 import CommunityCustomHooks from '../../components/community/CommunityCustomHooks';
 
 function CommunityCreateScreen() {

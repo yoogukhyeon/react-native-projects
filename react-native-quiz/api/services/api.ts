@@ -3,8 +3,9 @@
 import axios, { AxiosInstance } from 'axios';
 import CryptoJS from 'react-native-crypto-js';
 import { selectorFamily } from 'recoil';
+import { NewsData } from '../../screens/community/CommunityScreen';
 import { Data } from '../../screens/quiz/QuizScreen';
-import instance from '../instance';
+import { instance, naverInstance } from '../instance';
 
 export const fetchApiData = async (no: number): Promise<any[]> => {
 	const response = await instance.get(`/quiz/type?no=${no}`);
@@ -19,6 +20,22 @@ export const getQuizList = selectorFamily<Data[], number>({
 		(no: number) =>
 		async ({ get }) => {
 			const response = await fetchApiData(no);
+			return response;
+		},
+});
+
+export const fetchNaverNewsApiData = async (type: string): Promise<any> => {
+	const response: any = await naverInstance.get(`/search/news?query=${encodeURI(type)}&display=10&start=1&sort=sim`);
+	return response.data.items;
+};
+
+export const getNewsList = selectorFamily<NewsData[], string>({
+	key: 'getNewsList',
+	get:
+		(type: string) =>
+		async ({ get }) => {
+			const response = await fetchNaverNewsApiData(type);
+
 			return response;
 		},
 });
