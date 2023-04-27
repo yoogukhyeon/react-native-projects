@@ -14,14 +14,15 @@ import { useWindowDimensions } from 'react-native';
 import CommunitySwiper from '../../components/community/CommunitySwiper';
 import Padding from '../../components/common/Padding';
 import Divided from '../../components/common/Divided';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { testData } from '../../data';
 import CommunityTitle from '../../components/community/common/CommunityTitle';
 import Icon from '../../components/common/Icon';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { apiNewsDataState } from '../../api/store';
-import { getNewsList } from '../../api/services/api';
-
+import { fetchNaverNewsApiData, getNewsList } from '../../api/services/api';
+import { naverInstance } from '../../api/instance';
+import moment from 'moment';
 export interface NewsData {
 	title: string;
 	originallink: string;
@@ -38,12 +39,33 @@ export default function CommunityScreen({ navigation }) {
 	const [over, setOver] = useState<boolean>(true);
 
 	const [apiNewsData, setApiNewsData] = useRecoilState<NewsData[]>(apiNewsDataState);
-	const data = useRecoilValue(getNewsList('축구'));
-	useEffect(() => {
-		setApiNewsData(data);
-	}, []);
 
-	console.log('apiNewsData ::', apiNewsData);
+	// const data = useRecoilValue(getNewsList('축구'));
+	// useEffect(() => {
+	// 	console.log('rendering');
+	// 	setApiNewsData(data);
+	// }, []);
+	// console.log('data ::', data);
+
+	async function test() {
+		let response: any = await naverInstance.get(
+			`/search/news?query=${encodeURI('축구')}&display=10&start=1&sort=sim`
+		);
+
+		if (response) {
+			response = response.data.items.map((val: any) => {
+				const title = val.title.replace(/<[^>]*>?/g, '').replace(/&apos;/g, "'");
+				const pubDate = moment(val.pubDate).format('YYYY.MM.DD');
+				return { ...val, title, pubDate };
+			});
+		}
+
+		setApiNewsData(response);
+	}
+
+	useEffect(() => {
+		test();
+	}, []);
 	const getData = () => {
 		setLoading(true);
 		setArrSlice((perv) => perv + 3);
@@ -51,8 +73,8 @@ export default function CommunityScreen({ navigation }) {
 	};
 
 	const onEndReached = () => {
-		if (arrSlice > data.length) {
-			setArrSlice(data.length);
+		if (arrSlice > testData.length) {
+			setArrSlice(testData.length);
 			setOver(false);
 		} else {
 			getData();
