@@ -6,6 +6,7 @@ import { selectorFamily } from 'recoil';
 import { NewsData } from '../../screens/community/CommunityScreen';
 import { Data } from '../../screens/quiz/QuizScreen';
 import { instance, naverInstance } from '../instance';
+import moment from 'moment';
 
 export const fetchApiData = async (no: number): Promise<any[]> => {
 	const response = await instance.get(`/quiz/type?no=${no}`);
@@ -15,7 +16,7 @@ export const fetchApiData = async (no: number): Promise<any[]> => {
 };
 
 export const getQuizList = selectorFamily<Data[], number>({
-	key: 'getQuizList',
+	key: 'getQuizLists',
 	get:
 		(no: number) =>
 		async ({ get }) => {
@@ -24,17 +25,25 @@ export const getQuizList = selectorFamily<Data[], number>({
 		},
 });
 
-export const fetchNaverNewsApiData = async (type: string): Promise<any> => {
+export const fetchNaverNewsApiData = async (type: string): Promise<any[]> => {
 	const response: any = await naverInstance.get(`/search/news?query=${encodeURI(type)}&display=10&start=1&sort=sim`);
 	return response.data.items;
 };
 
 export const getNewsList = selectorFamily<NewsData[], string>({
-	key: 'getNewsList',
+	key: 'getNewsLists',
 	get:
 		(type: string) =>
 		async ({ get }) => {
-			const response = await fetchNaverNewsApiData(type);
+			let response = await fetchNaverNewsApiData(type);
+
+			if (response) {
+				response = response.map((val: any) => {
+					const title = val.title.replace(/<[^>]*>?/g, '').replace(/&apos;/g, "'");
+					const pubDate = moment(val.pubDate).format('YYYY.MM.DD');
+					return { ...val, title, pubDate };
+				});
+			}
 
 			return response;
 		},

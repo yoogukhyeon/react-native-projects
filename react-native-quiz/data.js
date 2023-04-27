@@ -1,4 +1,4 @@
-export const data = [
+export const testData = [
 	{
 		id: 1,
 		title: '제목',
