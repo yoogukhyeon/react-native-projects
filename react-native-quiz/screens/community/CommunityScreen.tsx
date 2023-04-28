@@ -60,17 +60,19 @@ export default function CommunityScreen({ navigation }) {
 			});
 		}
 
-		setApiNewsData(response);
+		return response;
 	}
 
 	useEffect(() => {
-		test();
+		test().then((res) => setApiNewsData(res));
 	}, []);
 	const getData = () => {
 		setLoading(true);
 		setArrSlice((perv) => perv + 3);
 		setLoading(false);
 	};
+
+	console.log(apiNewsData);
 
 	const onEndReached = () => {
 		if (arrSlice > testData.length) {
